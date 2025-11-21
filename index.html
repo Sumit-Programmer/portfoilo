@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My IT Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #050816;
+      color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar */
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(5, 8, 22, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.7rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #00f6ff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    nav ul li a {
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #00f6ff, #7c3aed);
+      transition: width 0.3s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5.5rem 1.5rem 3rem; /* extra top for fixed navbar */
+    }
+
+    section {
+      padding: 3rem 0 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #00f6ff, #7c3aed);
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #94a3b8;
+      margin-bottom: 0.4rem;
+    }
+
+    p {
+      color: #cbd5f5;
+      font-size: 0.98rem;
+    }
+
+    /* Hero */
+
+    #home {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+      min-height: 70vh;
+    }
+
+    .hero-left {
+      flex: 1 1 280px;
+    }
+
+    .hero-hello {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #94a3b8;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-name {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name span {
+      background: linear-gradient(90deg, #00f6ff, #7c3aed);
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: 1.02rem;
+      margin-bottom: 1rem;
+      color: #e2e8f0;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      color: #94a3b8;
+    }
+
+    .hero-cta {
+      margin-top: 1.4rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.6rem 1.3rem;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #00f6ff, #7c3aed);
+      color: #020617;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.8);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #e2e8f0;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 0.8);
+      transform: translateY(-1px);
+    }
+
+    .hero-right {
+      flex: 0 0 260px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .photo-wrapper {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      padding: 4px;
+      background: conic-gradient(from 180deg, #00f6ff, #7c3aed, #00f6ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.9);
+    }
+
+    .photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #020617;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-placeholder {
+      font-size: 0.8rem;
+      color: #64748b;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* Cards / Layout for sections */
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-top: 1.4rem;
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, rgba(148, 163, 184, 0.14), transparent 55%),
+                  #020617;
+      border-radius: 1.1rem;
+      padding: 1.4rem 1.3rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #94a3b8;
+      margin-bottom: 0.6rem;
+    }
+
+    ul {
+      margin-top: 0.3rem;
+      padding-left: 1.1rem;
+      color: #cbd5f5;
+      font-size: 0.95rem;
+    }
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+
+    .highlight {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    /* Extra fancy strip */
+
+    .highlight-strip {
+      margin-top: 2rem;
+      padding: 1rem 1.2rem;
+      border-radius: 0.9rem;
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.1), rgba(129, 140, 248, 0.12));
+      border: 1px dashed rgba(148, 163, 184, 0.5);
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    .highlight-strip span {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    /* Footer */
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0 0.7rem;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 640px) {
+      .hero-name {
+        font-size: 1.8rem;
+      }
+
+      .hero-right {
+        order: -1;
+        margin-bottom: 1.5rem;
+        flex: 1 1 100%;
+      }
+
+      .photo-wrapper {
+        width: 210px;
+        height: 210px;
+      }
+
+      nav ul {
+        display: none; /* keep simple: no mobile menu for school project */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">My<span>Portfolio</span></div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#overview">Projects</a></li>
+          <li><a href="#writer">Writer</a></li>
+          <li><a href="#calc">Calc</a></li>
+          <li><a href="#base">Base</a></li>
+          <li><a href="#extra">Reflection</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home">
+      <div class="hero-left">
+        <p class="hero-hello">Hello, I'm</p>
+        <h1 class="hero-name"><span>Sumit</span> (IT Student)</h1>
+
+        <div class="hero-badge">School IT Portfolio Website</div>
+
+        <p class="hero-tagline">
+          I created this interactive portfolio website to present my IT projects –
+          especially my work in <span class="highlight">LibreOffice Writer, Calc and Base</span>.
+        </p>
+
+        <p>
+          This site shows how I used office tools not just for theory,
+          but to design real, useful documents, spreadsheets and a complete database system.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#overview"><button class="btn btn-primary">View My IT Work</button></a>
+          <a href="#extra"><button class="btn btn-ghost">Why this project is special</button></a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="photo-wrapper">
+          <div class="photo-inner">
+            <!-- Replace this with your own photo: -->
+            <img src="my-pic.jpg" alt="My Photo">
+            <!-- <div class="photo-placeholder">
+              Your photo here<br/>
+              (replace in HTML)
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK OVERVIEW -->
+    <section id="overview">
+      <p class="section-subtitle">Overview</p>
+      <h2 class="section-title">IT Projects Covered in This Portfolio</h2>
+      <p>
+        In my IT subject, I worked with three main LibreOffice tools.  
+        This portfolio explains what I did in each one and how it helped me learn real-life computer skills.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="tag">LibreOffice Writer</div>
+          <h3 class="card-title">Formatted Project Report & Documentation</h3>
+          <p>
+            I created a properly formatted project report, including cover page,
+            headers and footers, page numbers, and screenshots.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">LibreOffice Calc</div>
+          <h3 class="card-title">Smart Spreadsheets & Calculations</h3>
+          <p>
+            I used formulas and functions to calculate marks, totals and summaries,
+            and created charts to show data clearly.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">LibreOffice Base</div>
+          <h3 class="card-title">Hospital Database Project</h3>
+          <p>
+            I designed and built a complete database system for a hospital,
+            including tables, relationships, forms, queries and reports.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Skills Gained</div>
+          <h3 class="card-title">From Theory to Practical Work</h3>
+          <ul>
+            <li>Understanding of real-world data handling.</li>
+            <li>Experience in documentation and presentation.</li>
+            <li>Confidence in using office tools for projects.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- WRITER SECTION -->
+    <section id="writer">
+      <p class="section-subtitle">Project 1</p>
+      <h2 class="section-title">LibreOffice Writer – Project Report & Documentation</h2>
+
+      <div class="grid-2">
+        <div>
+          <p>
+            In LibreOffice Writer, I prepared the complete project file for my
+            <span class="highlight">Hospital Database</span> and other IT work.
+            I focused on professional formatting so that the document looks like a real report.
+          </p>
+
+          <ul>
+            <li>Created a **cover page** with project title, my name, class and subject.</li>
+            <li>Added **page layout**: margins, line spacing and alignment for clean text.</li>
+            <li>Used **styles** (Heading 1, Heading 2, Normal) for proper structure.</li>
+            <li>Inserted **header & footer** with school name and page numbers.</li>
+            <li>Added **tables** to organise information clearly.</li>
+            <li>Inserted **screenshots** of each step of my Base and Calc work.</li>
+            <li>Exported the final report to **PDF** for submission.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag">What I learnt</div>
+          <h3 class="card-title">Document Design Skills</h3>
+          <ul>
+            <li>How to make documents look neat and professional.</li>
+            <li>How to organise long reports using headings and sections.</li>
+            <li>How to combine text, tables and images in one file.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALC SECTION -->
+    <section id="calc">
+      <p class="section-subtitle">Project 2</p>
+      <h2 class="section-title">LibreOffice Calc – Data & Calculations</h2>
+
+      <div class="grid-2">
+        <div>
+          <p>
+            In LibreOffice Calc, I created spreadsheets to manage and analyse data.
+            This helped me understand how businesses and organisations use spreadsheets.
+          </p>
+
+          <ul>
+            <li>Created a **marks sheet** / **billing sheet** with rows and columns.</li>
+            <li>Used basic formulas like <span class="highlight">=SUM(), =AVERAGE()</span>.</li>
+            <li>Practiced **cell referencing** (A1, B2, etc.).</li>
+            <li>Applied **sorting and filtering** to view specific data.</li>
+            <li>Created a **chart/graph** to visually show results.</li>
+            <li>Formatted cells (borders, colours, number formats) to improve readability.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag">What I learnt</div>
+          <h3 class="card-title">Analytical & Practical Skills</h3>
+          <ul>
+            <li>How to use spreadsheets for calculations instead of manual work.</li>
+            <li>How visual charts can explain data quickly.</li>
+            <li>Basic data analysis concepts used in real offices.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BASE SECTION -->
+    <section id="base">
+      <p class="section-subtitle">Project 3</p>
+      <h2 class="section-title">LibreOffice Base – Hospital Database Project</h2>
+
+      <div class="grid-2">
+        <div>
+          <p>
+            My main IT project was creating a <span class="highlight">Hospital Management Database</span>
+            using LibreOffice Base. This project shows how databases are used to store and manage information.
+          </p>
+
+          <ul>
+            <li>Planned the database structure for a hospital scenario.</li>
+            <li>Created **tables** like:
+              <ul>
+                <li>Patients</li>
+                <li>Doctors</li>
+                <li>Appointments</li>
+                <li>Billing / Payments</li>
+              </ul>
+            </li>
+            <li>Set **field types** (Text, Number, Date, etc.) and primary keys.</li>
+            <li>Defined **relationships** between tables (e.g., one doctor – many patients).</li>
+            <li>Designed **forms** for easy data entry (e.g., add new patient, new appointment).</li>
+            <li>Created **queries** to search and filter data (e.g., patients by doctor, date).</li>
+            <li>Generated **reports** to print summaries, like daily appointments or total bills.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="tag">What I learnt</div>
+          <h3 class="card-title">Real Database Concepts</h3>
+          <ul>
+            <li>How data is connected using tables and relationships.</li>
+            <li>The difference between documents, spreadsheets and databases.</li>
+            <li>How hospitals and other organisations can manage data digitally.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight-strip">
+        ✔ <span>Highlight for Teacher:</span>  
+        I combined all three tools – Writer, Calc and Base – in one connected project:  
+        Base for the database, Calc for calculations/charts, and Writer for the final report.
+      </div>
+    </section>
+
+    <!-- EXTRA / REFLECTION SECTION -->
+    <section id="extra">
+      <p class="section-subtitle">Bonus Section</p>
+      <h2 class="section-title">Why This Portfolio is Different</h2>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="tag">Interactive Website</div>
+          <h3 class="card-title">From Simple File to Live Web Page</h3>
+          <p>
+            Instead of submitting only printed pages, I built this portfolio as a website.
+            It has a navigation bar linked to each section, a hero section with my photo,
+            and clear sections for each tool I used.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Learning Reflection</div>
+          <h3 class="card-title">What This Project Taught Me</h3>
+          <ul>
+            <li>How to organise my work in a clean and modern layout.</li>
+            <li>How to describe technical work in simple language.</li>
+            <li>How IT tools connect to real life problems and solutions.</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    Made by Sumit • IT Portfolio
+  </footer>
+
+</body>
+</html>
